@@ -24,7 +24,6 @@ const Nav = () => {
     ).toFixed(0)}, ${(Math.random() * 255).toFixed(0)}, 0.9)`;
   };
 
-
   return (
     <>
       {/* Here i created the Navigation bar-- */}
@@ -45,7 +44,9 @@ const Nav = () => {
               key={index}
               to={`/?category=${category}`}
               className="mb-3 flex items-center">
-              <span style={{backgroundColor: color()}} className=" w-[15px] h-[15px] border border-black shadow-md mr-2 rounded-full"></span>
+              <span
+                style={{ backgroundColor: color() }}
+                className=" w-[15px] h-[15px] border border-black shadow-md mr-2 rounded-full"></span>
               {category}
             </Link>
           ))}

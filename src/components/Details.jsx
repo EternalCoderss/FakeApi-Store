@@ -1,27 +1,38 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loading from "./Loading";
 import axios from "axios";
+import { ProductContext } from "../Utils/Context";
 
 const Details = () => {
   // yahan pe context se products ko fetch krke product id k according product show krenge or fir is ko useEffect me call kr lenge -
 
+  // yaha hum ye use kr rahe hai jisse ki hum locally stored data se fetch kr sake details on the details page ---
+  const { products, setproducts } = useContext(ProductContext);
   //yaha useState ka use krke isko save kr lenge jisse ek single product ki jagah mil jaye, jisse wo data axios me jaake setproduct me laa sake--
   const [product, setproduct] = useState(null);
+
   const { id } = useParams();
-  const getSingleProduct = async () => {
-    try {
-      const { data } = await axios(`https://fakestoreapi.com/products/${id}`);
-      setproduct(data);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getSingleProduct = async () => {
+  //   try {
+  //     const { data } = await axios(`https://fakestoreapi.com/products/${id}`);
+  //     setproduct(data);
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // isko call krne k liye data ki id nikalni pdegi jiske liye hum useParams ka b use krenge jiska kaam hota h wo id nikalna
   useEffect(() => {
-    getSingleProduct();
+    //  Agar koi product nahi hai to products me se wo id nikal dijiye jo product me match nahi ho raha hai, sath m 0th index pe value chahiye--
+    if (!product) {
+      setproduct(
+        products.filter((e) => p.id == id),
+        [0]
+      );
+    }
+    // getSingleProduct();
   }, []);
 
   return product ? (
